@@ -1,0 +1,64 @@
+@use "./variables" as *;
+
+/********************************
+        Helpers
+*********************************/
+
+.section--header-underline {
+    text-align: center;
+    margin-bottom: 1rem;
+
+    .section__title {
+        & {
+            position: relative;
+            font-size: 60px;
+            text-transform: uppercase;
+            font-family: 'JosefinSans', sans-serif;
+            letter-spacing: 3px;
+            color: $white;
+        }
+    }
+}
+
+@media(max-width: $tablet) {
+    .section--header-underline {
+        .section__title {
+            font-size: 22px;
+        }
+    }
+}
+
+@mixin section-background-image {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+@mixin title-decoration {
+    &:after {
+        content: '';
+        left: 50%;
+        margin-left: -75px;
+        position: absolute;
+        width: 150px;
+        border-bottom: 1px solid $space;
+        bottom: 5px;
+    }
+    &:before {
+        content: '';
+        position: absolute;
+        bottom: 1px;
+        left: 50%;
+        background-color: $space;
+        transform: rotate(45deg);
+        width: 10px;
+        height: 10px; 
+    }
+}
+
+/********************************
+    Helper Classes
+*********************************/
+.hidden {
+    display: none;
+}
