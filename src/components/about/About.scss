@@ -1,0 +1,87 @@
+/************************************
+  Section About
+***********************************/
+.section-about {
+    & {
+        position: relative;
+        padding: 6rem 0;
+        color: rgba(255, 255, 255, 0.5);
+        @include section-background-image;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(26, 26, 26, 0.65);
+        z-index: 0;
+    }
+
+    .section__body {
+        position: relative;
+        z-index: 10;
+
+        .section__entry {
+            margin-bottom: 3rem;
+        }
+
+        .list-about {
+            & {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+                max-width: 600px;
+            }
+
+            li {
+                & {
+                    position: relative;
+                    display: block;
+                    padding: 1.5rem 0;
+                }
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 10px;
+                    height: 10px;
+                    background-color: $space;
+                    left: 0;
+                    bottom: 0;
+                    transform: rotate(45deg);
+                }
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    border-bottom: 1px solid $space;
+                    left: 0;
+                    bottom: 5px;
+                }
+
+                strong {
+                    display: inline-block;
+                    font-weight: 600;
+                    margin-right: 15px;
+                }
+
+                a {
+                    color: rgba(255, 255, 255, 0.5);
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: $tablet) {
+    .section-about {
+        & {
+            padding: 4rem 0;
+        }
+    }
+}

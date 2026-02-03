@@ -28,33 +28,6 @@
     }
 }
 
-@mixin section-background-image {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-}
-
-@mixin title-decoration {
-    &:after {
-        content: '';
-        left: 50%;
-        margin-left: -75px;
-        position: absolute;
-        width: 150px;
-        border-bottom: 1px solid $space;
-        bottom: 5px;
-    }
-    &:before {
-        content: '';
-        position: absolute;
-        bottom: 1px;
-        left: 50%;
-        background-color: $space;
-        transform: rotate(45deg);
-        width: 10px;
-        height: 10px; 
-    }
-}
 
 /********************************
     Helper Classes

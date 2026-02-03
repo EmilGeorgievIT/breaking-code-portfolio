@@ -1,0 +1,120 @@
+
+/************************************
+    Section Portfolio
+***********************************/
+
+.section-portfolio {
+    & {
+        position: relative;
+        padding: 6rem 0 7rem;
+        color: rgba(255, 255, 255, 0.5);
+        @include section-background-image;
+    }
+
+    .slider-portfolio {
+        & {
+            padding: 4rem 0;
+        }
+
+        .slider__slide {
+            padding: 0 2rem;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .slick-slide {
+            height: 100%;
+        }
+
+        .slider__inner {
+            position: relative;
+        }
+
+        .slider__inner:hover {
+            &:after {
+                height: 100%;
+            }
+
+            .slider__overlay {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        .slider__inner:after {
+            content: '';
+            position: absolute;
+            background-color: $space;
+            width: 10px;
+            left: 0;
+            bottom: 0;
+            height: 0;
+            z-index: 10;
+            transition: height .4s ease;
+        }
+
+        .slider__overlay {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(34, 34, 34, 0.9);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .4s;
+            padding: 1rem;
+            color: $white;
+        }
+
+        .slider__overlay-content {
+            & {
+                text-align: center;
+            }
+
+            h3 {
+                color: $white;
+            }
+
+            p {
+                color: rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        .slider__image {
+            width: 100%;
+            height: 320px;
+            @include section-background-image;
+        }
+
+
+        .slick-dots li button {
+            width: 10px;
+            height: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+
+            &:before {
+                content: none;
+            }
+        }
+
+        .slick-dots li.slick-active button {
+            background-color: $space;
+        }
+    }
+}
+
+@media(max-width: $tablet) {
+    .section-portfolio {
+        & {
+            padding: 4rem 0;
+        }
+
+        .slider-portfolio {
+            padding: 2rem 0;
+        }
+    }
+}

@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
+import { Header } from '../header/Header';
+import { Intro } from '../intro/Intro';
+import { About } from '../about/About';
+import { Resume } from '../resume/Resume';
+import { Portfolio } from '../portfolio/Portfolio';
+import { Contact } from '../contact/Contact';
 
-// import Resume from '../Resume/Resume';
-// import Intro from '../Intro/Intro';
-// import About from '../About/About';
-// import Portfolio from '../Portfolio/Portfolio';
-// import Contact from '../Contact/Contact';
-// import Header from '../Header/Header';
 
 export const Home: React.FC = () => {
     const [isFixed, setIsFixed] = useState<boolean>(false);
@@ -31,12 +31,12 @@ export const Home: React.FC = () => {
     return (
         <>
             <div className="wrapper" ref={backToTopRef}>
-                {/* <Header isFixed={isFixed} />
+                <Header isFixed={isFixed} />
                 <Intro isFixed={isFixed} />
                 <About />
                 <Resume />
                 <Portfolio />
-                <Contact /> */}
+                <Contact />
 
                 <a
                     href="#home"

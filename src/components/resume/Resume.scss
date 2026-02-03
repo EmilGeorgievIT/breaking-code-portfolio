@@ -1,0 +1,26 @@
+/************************************
+    Resume
+***********************************/
+
+.section-resume {
+    & {
+        @include section-background-image;
+        padding: 6rem 0;
+    }
+
+    .section__body {
+        padding: 2rem 0;
+    }
+
+    .section__actions {
+        margin-top: 1rem;
+    }
+}
+
+@media(max-width: $tablet) {
+    .section-resume {
+        & {
+            padding: 4rem 0;
+        }
+    }
+}
