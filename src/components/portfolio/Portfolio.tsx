@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import Slider, { Settings } from "react-slick";
 
 // Asset imports
@@ -6,19 +7,59 @@ import dailySale from '../../images/DailySale.png';
 import eMart from '../../images/eMart.png';
 import techfynder from '../../images/techfynder.png';
 import testtriangle from '../../images/testtriangle.png';
+import myEquifax from '../../images/myequifax_laptop.png';
 
 import './Portfolio.scss';
 
-export const Portfolio: React.FC = () => {
-    const backgroundImages: Record<string, React.CSSProperties> = {
-        work: { backgroundImage: `url(${work})` },
-        dailySale: { backgroundImage: `url(${dailySale})` },
-        eMart: { backgroundImage: `url(${eMart})` },
-        testtriangle: { backgroundImage: `url(${testtriangle})` },
-        techfynder: { backgroundImage: `url(${techfynder})` },
-    };
+// 1. Define the shape of our Portfolio items
+interface PortfolioItem {
+    id: string;
+    title: string;
+    description: string;
+    url: string;
+    image: string;
+}
 
-    const settings: Settings = {
+const PORTFOLIO_DATA: PortfolioItem[] = [
+    {
+        id: 'myEquifax',
+        title: 'myEquifax',
+        url: 'https://my.equifax.com',
+        image: myEquifax,
+        description: 'myEquifax is a free self-service portal designed to give you direct control over your credit information and security.'
+    },
+    {
+        id: 'techfynder',
+        title: 'Techfynder',
+        url: 'http://techfynder.com/',
+        image: techfynder,
+        description: 'Dedicated platform for IT professionals to connect globally. Built with experience in Angular 7 and Node Js.'
+    },
+    {
+        id: 'dailySale',
+        title: 'DailySale',
+        url: 'http://daily-sale.herokuapp.com/',
+        image: dailySale,
+        description: 'Online web platform for posting free ads and contacting users.'
+    },
+    {
+        id: 'eMart',
+        title: 'eMart',
+        url: 'https://emart-205419.firebaseapp.com/',
+        image: eMart,
+        description: 'eCommerce website built on Angular 4 and Firebase.'
+    },
+    {
+        id: 'testtriangle',
+        title: 'Test Triangle',
+        url: 'https://www.testtriangle.com/',
+        image: testtriangle,
+        description: 'Emerging IT service provider specializing in application testing, DevOps, and RPA.'
+    }
+];
+
+export const Portfolio: React.FC = () => {
+    const sliderSettings = useMemo<Settings>(() => ({
         dots: true,
         infinite: true,
         speed: 500,
@@ -28,87 +69,50 @@ export const Portfolio: React.FC = () => {
         responsive: [
             {
                 breakpoint: 1024,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                }
+                settings: { slidesToShow: 2, slidesToScroll: 2 }
             },
             {
                 breakpoint: 600,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
+                settings: { slidesToShow: 1, slidesToScroll: 1 }
             },
         ]
-    };
+    }), []);
 
     return (
-        <section id="section-4" style={backgroundImages.work} className="section-portfolio">
+        <section
+            id="section-4"
+            className="section-portfolio"
+            style={{ backgroundImage: `url(${work})` }}
+        >
             <div className="container">
                 <div className="section__head section--header-underline">
                     <h2 className="section__title">Portfolio</h2>
                 </div>
 
                 <div className="section__body">
-                    <Slider className="slider-portfolio" {...settings}>
-                        {/* Techfynder */}
-                        <a href="http://techfynder.com/" className="slider__slide">
-                            <div className="slider__inner">
-                                <div style={backgroundImages.techfynder} className="slider__image" />
-                                <div className="slider__overlay">
-                                    <div className="slider__overlay-content">
-                                        <h3>Techfynder</h3>
-                                        <p>
-                                            Dedicated platform for IT professionals to connect globally.
-                                            Built with experience in Angular 7 and Node Js.
-                                        </p>
+                    <Slider className="slider-portfolio" {...sliderSettings}>
+                        {PORTFOLIO_DATA.map((item) => (
+                            <a
+                                key={item.id}
+                                href={item.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="slider__slide"
+                            >
+                                <div className="slider__inner">
+                                    <div
+                                        className="slider__image"
+                                        style={{ backgroundImage: `url(${item.image})` }}
+                                    />
+                                    <div className="slider__overlay">
+                                        <div className="slider__overlay-content">
+                                            <h3>{item.title}</h3>
+                                            <p>{item.description}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-
-                        {/* DailySale */}
-                        <a href="http://daily-sale.herokuapp.com/" className="slider__slide">
-                            <div className="slider__inner">
-                                <div style={backgroundImages.dailySale} className="slider__image" />
-                                <div className="slider__overlay">
-                                    <div className="slider__overlay-content">
-                                        <h3>DailySale</h3>
-                                        <p>Online web platform for posting free ads and contacting users.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        {/* eMart */}
-                        <a href="https://emart-205419.firebaseapp.com/" className="slider__slide">
-                            <div className="slider__inner">
-                                <div style={backgroundImages.eMart} className="slider__image" />
-                                <div className="slider__overlay">
-                                    <div className="slider__overlay-content">
-                                        <h3>eMart</h3>
-                                        <p>eCommerce website built on Angular 4 and Firebase.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        {/* Test Triangle */}
-                        <a href="https://www.testtriangle.com/" className="slider__slide">
-                            <div className="slider__inner">
-                                <div style={backgroundImages.testtriangle} className="slider__image" />
-                                <div className="slider__overlay">
-                                    <div className="slider__overlay-content">
-                                        <h3>Test Triangle</h3>
-                                        <p>
-                                            Emerging IT service provider specializing in application testing,
-                                            DevOps, RPA, and custom software development.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
+                        ))}
                     </Slider>
                 </div>
             </div>

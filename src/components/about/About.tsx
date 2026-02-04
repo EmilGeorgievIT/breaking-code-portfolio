@@ -19,12 +19,10 @@ export const About: React.FC = () => {
                             <div className="section__entry">
                                 <p>
                                     Hello, I'm Emil. <br />
-                                    I'm a highly talented website developer with experience in building high quality
-                                    modern and professional sites of various types (company/organization website,
-                                    landing page, blog, personal website, eCommerce store, portfolio website). <br />
-                                    My knowledge includes: creating site, setting up and installing plugins, fixing
-                                    bugs, expanding the functionality of the site. I can make a website from scratch
-                                    or redesign and improve your existing site.
+                                    I am a skilled website developer with experience in building high-quality, modern, and professional websites,
+                                    including company and organization sites, landing pages, blogs, personal websites, eCommerce stores, and portfolio websites.
+                                    My expertise includes website development, plugin setup and installation, bug fixing, and extending site functionality.
+                                    I can build a website from scratch or redesign and enhance an existing one.
                                 </p>
                             </div>
 
@@ -38,25 +36,25 @@ export const About: React.FC = () => {
                                 <li>
                                     <p>
                                         <strong>Email:</strong>
-                                        <a href="mailto:emil_georgiev_it@abv.bg">emil_georgiev_it@abv.bg</a>
+                                        <a href="mailto:emilgeorgievit@gmail.com">emilgeorgievit@gmail.com</a>
                                     </p>
                                 </li>
                                 <li>
                                     <p>
                                         <strong>Address:</strong>
                                         <a
-                                            href="https://www.google.com/maps/place/6+Carrig+Ct,+Fortunestown,+Dublin/data=!4m2!3m1!1s0x4867746724d90917:0x66baef66771ce998?sa=X&ved=2ahUKEwjlwcLE1dPlAhWxqHEKHRVNCT0Q8gEwAHoECBQQAQ"
+                                            href="https://maps.app.goo.gl/zVpzGxBMyz7fvyMf7"
                                             target="_blank"
                                             rel="noreferrer"
                                         >
-                                            6 Carrig Court, Fortunestown, Dublin
+                                            Sofia, Bulgaria
                                         </a>
                                     </p>
                                 </li>
                                 <li>
                                     <p>
                                         <strong>Phone:</strong>
-                                        <a href="tel:0833617736">083 361 7736</a>
+                                        <a href="tel:+359897765506">+359897765506</a>
                                     </p>
                                 </li>
                                 <li>

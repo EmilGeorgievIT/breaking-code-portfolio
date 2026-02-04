@@ -1,4 +1,4 @@
-import ScrollSpy from "react-scrollspy-navigation";
+import React from 'react';
 import logo from '../../images/logo2.png';
 import './Header.scss';
 
@@ -7,6 +7,37 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ isFixed }) => {
+    const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, targetId: string) => {
+        console.log(`handleScroll called with targetId: ${targetId}`);
+        e.preventDefault();
+        closeMenu(); 
+
+        const id = targetId.replace('#', '');
+        const element = document.getElementById(id);
+
+        if (element) {
+            console.log(`Scrolling to element with id: ${id}`);
+            element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+            });
+        } else {
+            console.warn(`Element with id ${id} not found!`);
+        }
+    };
+
+    // const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, targetId: string) => {
+    //     e.preventDefault();
+    //     const element = document.getElementById(targetId.replace('#', ''));
+    //     if (element) {
+    //         element.scrollIntoView({
+    //             behavior: 'smooth',
+    //             block: 'start',
+    //         });
+    //     }
+        
+    // };
+
     const closeMenu = () => {
         const burger = document.querySelector('.burger');
         const x = document.querySelector('.x');
@@ -63,48 +94,47 @@ export const Header: React.FC<HeaderProps> = ({ isFixed }) => {
         }, 120);
     };
 
+    const navLinks = [
+        { name: 'Home', href: '#section-1' },
+        { name: 'About Me', href: '#section-2' },
+        { name: 'Resume', href: '#section-3' },
+        { name: 'Portfolio', href: '#section-4' },
+        { name: 'Contact', href: '#section-5' },
+    ];
+
     return (
-        <>
-            <header className={isFixed ? 'header fixed' : 'header'}>
-                <div className="header__inner">
-                    <a href='/' className="logo">
-                        <img src={logo} alt="" />
-                    </a>
+        <header className={isFixed ? 'header fixed' : 'header'}>
+            <div className="header__inner">
+                <a href='/' className="logo">
+                    <img src={logo} alt="Logo" />
+                </a>
 
-                    {window.innerWidth <= 767 && (
-                        <div className={isFixed ? 'nav-mobile fixed' : 'nav-mobile'}>
-                            <div className="circle"></div>
-                            <div className="menu">
-                                <ScrollSpy activeClass="current">
-                                    <ul>
-                                        <li onClick={closeMenu}>
-                                            <a href='#section-1'><span className='nav__title'>Home</span></a>
-                                        </li>
-                                        <li onClick={closeMenu}>
-                                            <a href='#section-2'><span className='nav__title'>About Me</span></a>
-                                        </li>
-                                        <li onClick={closeMenu}>
-                                            <a href='#section-3'><span className='nav__title'>Resume</span></a>
-                                        </li>
-                                        <li onClick={closeMenu}>
-                                            <a href='#section-4'><span className='nav__title'>Portfolio</span></a>
-                                        </li>
-                                        <li onClick={closeMenu}>
-                                            <a href='#section-5'><span className='nav__title'>Contact</span></a>
-                                        </li>
-                                    </ul>
-                                </ScrollSpy>
-                            </div>
-
-                            <div onClick={openMenu} className="burger">
-                                <div className="x"></div>
-                                <div className="y"></div>
-                                <div className="z"></div>
-                            </div>
+                {window.innerWidth <= 767 && (
+                    <div className={isFixed ? 'nav-mobile fixed' : 'nav-mobile'}>
+                        <div className="circle"></div>
+                        <div className="menu">
+                            <ul>
+                                {navLinks.map((link) => (
+                                    <li key={link.href}>
+                                        <a
+                                            href={link.href}
+                                            onClick={(e) => handleScroll(e, link.href)}
+                                        >
+                                            <span className='nav__title'>{link.name}</span>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
-                    )}
-                </div>
-            </header>
-        </>
+
+                        <div onClick={openMenu} className="burger">
+                            <div className="x"></div>
+                            <div className="y"></div>
+                            <div className="z"></div>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </header>
     );
-}
+};

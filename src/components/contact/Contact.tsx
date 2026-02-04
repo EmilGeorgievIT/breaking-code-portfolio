@@ -115,7 +115,7 @@ export const Contact: React.FC = () => {
                                         </svg>
                                         <strong className="list-contacts-title">Phone</strong>
                                     </p>
-                                    <a href="tel:0833617736">0833617736</a>
+                                    <a href="tel:+359897765506">+359897765506</a>
                                 </li>
                                 <li>
                                     <p>
@@ -125,7 +125,7 @@ export const Contact: React.FC = () => {
                                         </svg>
                                         <strong className="list-contacts-title">Email</strong>
                                     </p>
-                                    <a href="mailto:emil_georgiev_it@abv.bg">emil_georgiev_it@abv.bg</a>
+                                    <a href="mailto:emilgeorgievit@gmail.com">emilgeorgievit@gmail.com</a>
                                 </li>
                             </ul>
                         </div>

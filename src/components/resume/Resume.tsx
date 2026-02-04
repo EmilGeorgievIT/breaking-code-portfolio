@@ -1,12 +1,22 @@
-import resume from '../../images/resume.jpg';
+import React from 'react';
+import resumeImg from '../../images/resume.jpg';
 import { Link } from 'react-router';
 import './Resume.scss';
 
+// --- Types ---
 interface SkillProps {
     title: string;
     percentage: string;
 }
 
+interface ResumeEntry {
+    title: string;
+    subtitle: string;
+    period: string;
+    description?: string;
+}
+
+// --- Sub-Components ---
 const Skill: React.FC<SkillProps> = ({ title, percentage }) => (
     <li>
         <p>
@@ -14,103 +24,118 @@ const Skill: React.FC<SkillProps> = ({ title, percentage }) => (
             <span className="progress-list-value">{percentage}</span>
         </p>
         <div className="progress">
-            <div style={{ width: percentage }} className="progress__bar"></div>
+            <div style={{ width: percentage }} className="progress__bar" role="progressbar" aria-valuenow={parseInt(percentage)} aria-valuemin={0} aria-valuemax={100}></div>
         </div>
     </li>
 );
 
+const ResumeItem: React.FC<ResumeEntry> = ({ title, period, subtitle, description }) => (
+    <li>
+        <h4>{title}</h4>
+        <span className="time">{period}</span>
+        <h5>{subtitle}</h5>
+        {description && <p>{description}</p>}
+    </li>
+);
+
+// --- Content Data ---
+const EDUCATION: ResumeEntry[] = [
+    { title: "TECHNICAL UNIVERSITY-VARNA", period: "2014 - 2018", subtitle: "Bachelor Computer Science and Technologies" },
+    { title: "SCHOOL PGD 'YURI GAGARIN'", period: "2010 - 2013", subtitle: "Professional Automechanic" },
+];
+
+const EMPLOYMENT: ResumeEntry[] = [
+    {
+        title: "Bosch Digital",
+        subtitle: "Senior Front End Developer",
+        period: "2022 Jan – till now",
+        description: "NDA"
+    },
+    {
+        title: "Equifax",
+        subtitle: "Senior Front End Developer",
+        period: "2020 May – 2021 Dec",
+        description: "I worked on a credit score management platform, where my responsibilities included developing new features, providing ongoing support, and maintaining the system. I was also partially involved in optimizing the platform by contributing to its transition toward a micro front-end architecture."
+    },
+    {
+        title: "TestTriangle",
+        subtitle: "Middle Front End Developer",
+        period: "2019 Jan – 2020 May",
+        description: "My first project involved creating a new website for Test Triangle. My second project focused on developing a large platform for posting job opportunities for contractors. Through these projects, I gained hands-on experience with the technologies below."
+    },
+    {
+        title: "2Create",
+        subtitle: "Front End Developer",
+        period: "2017 Jan – 2018 Dec",
+        description: "I joined the company as a trainee and progressed into a Junior Front-End Developer role. My responsibilities include designing, developing, and maintaining websites for the company’s clients. "
+    },
+    {
+        title: "Smart Home Sys Ltd",
+        subtitle: "Web Administrator",
+        period: "2016 Dec – 2017 Mar",
+        description: "I worked on an international news website. During my internship, I gained experience in developing content management systems (CMS) and strengthened my skills and knowledge in PHP."
+    }
+];
+
+const SKILLS: SkillProps[] = [
+    { title: "HTML5", percentage: "95%" },
+    { title: "JS/TS", percentage: "90%" },
+    { title: "Angular 19+", percentage: "90%" },
+    { title: "Cypress", percentage: "90%" },
+    { title: "CSS (SASS/LESS)", percentage: "99%" },
+    { title: "React", percentage: "70%" },
+];
+
+// --- Main Component ---
 export const Resume: React.FC = () => {
-    const backgroundImage: React.CSSProperties = {
-        backgroundImage: `url(${resume})`,
+    const sectionStyle: React.CSSProperties = {
+        backgroundImage: `url(${resumeImg})`,
     };
 
     return (
-        <section id="section-3" style={backgroundImage} className="section-resume">
+        <section id="section-3" style={sectionStyle} className="section-resume">
             <div className="section__head section--header-underline">
                 <h2 className="section__title">Resume</h2>
             </div>
 
             <div className="section__body">
                 <div className="container container--small">
-                    {/* Education Section */}
-                    <div className="resume resume-education">
+
+                    {/* Education */}
+                    <article className="resume">
                         <div className="resume__head">
                             <h4 className="resume__title">Education</h4>
                         </div>
                         <div className="resume__body">
                             <ul className="list-resume">
-                                <li>
-                                    <h4>TECHNICAL UNIVERSITY-VARNA</h4>
-                                    <span className="time">2014 - 2018</span>
-                                    <p>Bachelor Computer Science and Technologies</p>
-                                </li>
-                                <li>
-                                    <h4>SCHOOL PGD "YURI GAGARIN"</h4>
-                                    <span className="time">2010 - 2013</span>
-                                    <p>Professional Automechanic</p>
-                                </li>
+                                {EDUCATION.map((edu, i) => <ResumeItem key={i} {...edu} />)}
                             </ul>
                         </div>
-                    </div>
+                    </article>
 
-                    {/* Employment Section */}
-                    <div className="resume resume-education">
+                    {/* Employment */}
+                    <article className="resume">
                         <div className="resume__head">
                             <h4 className="resume__title">Employment</h4>
                         </div>
                         <div className="resume__body">
                             <ul className="list-resume">
-                                <li>
-                                    <h4>TestTriangle - Front End Developer</h4>
-                                    <span className="time">2019 Jan – Present</span>
-                                    <p>
-                                        I was working on Techfynder website which is a dedicated platform for IT,
-                                        Contract Professionals, to connect globally with Businesses, matching skills,
-                                        rates, experience, and location. I learned how to working with Angular 7 and Node Js.
-                                    </p>
-                                </li>
-                                <li>
-                                    <h4>2Create - Front End Developer</h4>
-                                    <span className="time">2017 Jan – 2018 Dec</span>
-                                    <p>
-                                        Initially joining the company as a trainee, I have progressed as Front-End
-                                        developer. My role requires to create, develop and execute web sites for the
-                                        Company’s clients.
-                                    </p>
-                                </li>
-                                <li>
-                                    <h4>Smart Home Sys - Web Administrator</h4>
-                                    <span className="time">Oct 2016 - Dec 2016</span>
-                                    <p>
-                                        I worked on international news website. During the internship, I gained
-                                        experience on how to create my own websites CMS systems and improved my skills
-                                        and knowledge in PHP.
-                                    </p>
-                                </li>
+                                {EMPLOYMENT.map((job, i) => <ResumeItem key={i} {...job} />)}
                             </ul>
                         </div>
-                    </div>
+                    </article>
 
-                    {/* Skills Section */}
-                    <div className="resume resume-education">
+                    {/* Skills */}
+                    <article className="resume">
                         <div className="resume__head">
                             <h4 className="resume__title">General Skills</h4>
                         </div>
                         <div className="resume__body">
                             <ul className="list-skills">
-                                <Skill title="HTML5" percentage="95%" />
-                                <Skill title="JS" percentage="90%" />
-                                <Skill title="Angular 4+" percentage="90%" />
-                                <Skill title="React" percentage="70%" />
-                                <Skill title="WebPack" percentage="60%" />
-                                <Skill title="jQuery" percentage="77%" />
-                                <Skill title="Express" percentage="80%" />
-                                <Skill title="CSS" percentage="99%" />
-                                <Skill title="LESS / SASS" percentage="99%" />
-                                <Skill title="WordPress" percentage="58%" />
+                                {SKILLS.map(skill => <Skill key={skill.title} {...skill} />)}
                             </ul>
                         </div>
-                    </div>
+                    </article>
 
                     <div className="section__actions">
                         <Link to="/files/EmilGeorgievCV.docx" target="_blank" download className="btn">

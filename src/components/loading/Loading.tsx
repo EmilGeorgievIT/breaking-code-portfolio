@@ -1,95 +1,51 @@
-import { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './Loading.scss';
 
 export const Loading: React.FC = () => {
     const animationTime = 20;
-    const days = 7;
+    const initialDays = 7;
 
-    const deadlineAnimation = () => {
-        const designerArmGroup =
-            document.getElementById('designer-arm-grop') as HTMLElement | null;
-
-        if (!designerArmGroup) return;
-
-        setTimeout(() => {
-            designerArmGroup.style.animationDuration = '1.5s';
-        }, 0);
-
-        setTimeout(() => {
-            designerArmGroup.style.animationDuration = '1s';
-        }, 4000);
-
-        setTimeout(() => {
-            designerArmGroup.style.animationDuration = '0.7s';
-        }, 8000);
-
-        setTimeout(() => {
-            designerArmGroup.style.animationDuration = '0.3s';
-        }, 12000);
-
-        setTimeout(() => {
-            designerArmGroup.style.animationDuration = '0.2s';
-        }, 15000);
-    };
-
-    const deadlineText = () => {
-        const el = document.querySelector('.deadline-days') as HTMLElement | null;
-        if (!el) return;
-
-        const html = `
-      <div class="mask-red">
-        <div class="inner">${el.innerHTML}</div>
-      </div>
-      <div class="mask-white">
-        <div class="inner">${el.innerHTML}</div>
-      </div>
-    `;
-
-        el.innerHTML = html;
-    };
-
-    const timer = (totalTime: number, deadline: number) => {
-        const time = totalTime * 1000;
-        const dayDuration = time / deadline;
-        let actualDay = deadline;
-
-        const dayEl = document.getElementsByClassName('day')[0] as HTMLElement | undefined;
-        if (!dayEl) return;
-
-        const interval = setInterval(() => {
-            actualDay--;
-            dayEl.textContent = String(actualDay);
-
-            if (actualDay === 0) {
-                clearInterval(interval);
-                dayEl.textContent = String(deadline);
-            }
-        }, dayDuration);
-    };
+    const [currentDay, setCurrentDay] = useState(initialDays);
+    const armRef = useRef<SVGGElement>(null);
 
     useEffect(() => {
-        const progressTimeFill =
-            document.getElementById('progress-time-fill') as HTMLElement | null;
-        const deathGroup =
-            document.getElementById('death-group') as HTMLElement | null;
+        const dayDurationMs = (animationTime * 1000) / initialDays;
 
-        if (progressTimeFill) {
-            progressTimeFill.style.animationDuration = `${animationTime}s`;
-        }
+        const interval = setInterval(() => {
+            setCurrentDay((prev) => {
+                if (prev <= 1) {
+                    return initialDays;
+                }
+                return prev - 1;
+            });
+        }, dayDurationMs);
 
-        if (deathGroup) {
-            deathGroup.style.animationDuration = `${animationTime}s`;
-        }
+        return () => clearInterval(interval);
+    }, [animationTime, initialDays]);
 
-        deadlineText();
-        deadlineAnimation();
-        timer(animationTime, days);
+    useEffect(() => {
+        const arm = armRef.current;
+        if (!arm) return;
+
+        const schedule = [
+            { time: 0, speed: '1.5s' },
+            { time: 4000, speed: '1s' },
+            { time: 8000, speed: '0.7s' },
+            { time: 12000, speed: '0.3s' },
+            { time: 15000, speed: '0.2s' },
+        ];
+
+        const timeouts = schedule.map(s =>
+            setTimeout(() => { arm.style.animationDuration = s.speed; }, s.time)
+        );
+
+        return () => timeouts.forEach(clearTimeout);
     }, []);
 
     return (
         <div className="deadline">
             <div className="deadline__content">
-                <svg preserveAspectRatio="none" id="line" viewBox="0 0 581 158" enableBackground="new 0 0 581 158">
+                <svg preserveAspectRatio="none" id="line" viewBox="0 0 581 158">
                     <g id="fire">
                         <rect id="mask-fire-black" x="511" y="41" width="38" height="34" />
                         <g>
@@ -116,25 +72,15 @@ export const Loading: React.FC = () => {
                         <path fill="#FFFFFF" d="M535,65.625c1.125,0.625,2.25-1.125,2.25-1.125l11.625-22.375c0,0,0.75-0.875-1.75-2.125
                                                     s-3.375,0.25-3.375,0.25s-8.75,21.625-9.875,23.5S533.875,65,535,65.625z"/>
                     </g>
-                    <g>
-                        <defs>
-                            <path id="SVGID" d="M484.5,75.584c-3.172-5.342-5.833-10.084-2.979-11.628c2.195-1.188,4.646,3.294,7.229,8.878
-                                                    c2.609,5.64,4.444,10.313,3.229,11.044C490.667,84.667,487.667,80.917,484.5,75.584z M571,76v-5h-23.608
-                                                    c0.476-9.951-4.642-13.25-4.642-13.25l-3.125,4c0,0,3.726,2.7,3.625,5.125c-0.071,1.714-2.711,3.18-4.962,4.125H517v5h10v24h-25
-                                                    v-5.666c0,0,0.839,0,2.839-0.667s6.172-3.667,4.005-6.333s-7.49,0.333-9.656,0.166s-6.479-1.5-8.146,1.917
-                                                    c-1.551,3.178,0.791,5.25,5.541,6.083l-0.065,4.5H16c-2.761,0-5,2.238-5,5v17c0,2.762,2.239,5,5,5h549c2.762,0,5-2.238,5-5v-17
-                                                    c0-2.762-2.238-5-5-5h-3V76H571z M535,65.625c1.125,0.625,2.25-1.125,2.25-1.125l11.625-22.375c0,0,0.75-0.875-1.75-2.125
-                                                    s-3.375,0.25-3.375,0.25s-8.75,21.625-9.875,23.5S533.875,65,535,65.625z"/>
-                        </defs>
 
-                        <clipPath id="SVGID">
-                            <use overflow="visible" />
-                        </clipPath>
+                    <rect
+                        id="progress-time-fill"
+                        x="-100%" y="99"
+                        fill="#BE002A" width="586" height="30"
+                        style={{ animationDuration: `${animationTime}s` }}
+                    />
 
-                        <rect id="progress-time-fill" x="-100%" y="99" clipPath="url(SVGID)" fill="#BE002A" width="586" height="30" />
-                    </g>
-
-                    <g id="death-group">
+                    <g id="death-group" style={{ animationDuration: `${animationTime}s` }}>
                         <path id="death" fill="#BE002A" d="M-46.25,40.416c-5.42-0.281-8.349,3.17-13.25,3.918c-5.716,0.871-10.583-0.918-10.583-0.918
                                                             C-67.5,49-65.175,50.6-62.083,52c5.333,2.416,4.083,3.5,2.084,4.5c-16.5,4.833-15.417,27.917-15.417,27.917L-75.5,84.75
                                                             c-1,12.25-20.25,18.75-20.25,18.75s39.447,13.471,46.25-4.25c3.583-9.333-1.553-16.869-1.667-22.75
@@ -149,20 +95,25 @@ export const Loading: React.FC = () => {
                                                                     c5,6.668,4.75,14.084,4.75,14.084s4.354-7.732,0.083-17.666C-10,32.75-19.647,28.676-19.647,28.676l0.463-0.988L-20.996,26.839z"/>
                     </g>
 
+
                     <path id="designer-body" fill="#FEFFFE" d="M514.75,100.334c0,0,1.25-16.834-6.75-16.5c-5.501,0.229-5.583,3-10.833,1.666
                                                                     c-3.251-0.826-5.084-15.75-0.834-22c4.948-7.277,12.086-9.266,13.334-7.833c2.25,2.583-2,10.833-4.5,14.167
                                                                     c-2.5,3.333-1.833,10.416,0.5,9.916s8.026-0.141,10,2.25c3.166,3.834,4.916,17.667,4.916,17.667l0.917,2.5l-4,0.167L514.75,100.334z
-                                                                    "/>
-
+                                                                    " />
                     <circle id="designer-head" fill="#FEFFFE" cx="516.083" cy="53.25" r="6.083" />
 
-                    <g id="designer-arm-grop">
+                    <g id="designer-arm-grop" ref={armRef}>
                         <path id="designer-arm" fill="#FEFFFE" d="M505.875,64.875c0,0,5.875,7.5,13.042,6.791c6.419-0.635,11.833-2.791,13.458-4.041s2-3.5,0.25-3.875s-11.375,5.125-16,3.25c-5.963-2.418-8.25-7.625-8.25-7.625l-2,1.125L505.875,64.875z" />
                     </g>
                 </svg>
+
                 <div className="deadline-days">
-                    Deadline <span className="day">7</span>{' '}
-                    <span className="days">days</span>
+                    <div className="mask-red">
+                        <div className="inner">Deadline <span className="day">{currentDay}</span> days</div>
+                    </div>
+                    <div className="mask-white">
+                        <div className="inner">Deadline <span className="day">{currentDay}</span> days</div>
+                    </div>
                 </div>
             </div>
         </div>
