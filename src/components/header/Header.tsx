@@ -1,4 +1,4 @@
-import ScrollspyNav from "react-scrollspy-navigation";
+import ScrollSpy from "react-scrollspy-navigation";
 import logo from '../../images/logo2.png';
 import './Header.scss';
 
@@ -75,9 +75,7 @@ export const Header: React.FC<HeaderProps> = ({ isFixed }) => {
                         <div className={isFixed ? 'nav-mobile fixed' : 'nav-mobile'}>
                             <div className="circle"></div>
                             <div className="menu">
-                                <ScrollspyNav
-                                    scrollTargetIds={["section-1", "section-2", "section-3", "section-4", "section-5"]}
-                                    activeNavClass="current">
+                                <ScrollSpy activeClass="current">
                                     <ul>
                                         <li onClick={closeMenu}>
                                             <a href='#section-1'><span className='nav__title'>Home</span></a>
@@ -95,7 +93,7 @@ export const Header: React.FC<HeaderProps> = ({ isFixed }) => {
                                             <a href='#section-5'><span className='nav__title'>Contact</span></a>
                                         </li>
                                     </ul>
-                                </ScrollspyNav>
+                                </ScrollSpy>
                             </div>
 
                             <div onClick={openMenu} className="burger">

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import contact from '../../images/contact.jpg';
+import contact from '../../images/contact.png';
 import './Contact.scss';
 import { messageService } from '../../services/messageService';
 

@@ -4,7 +4,7 @@ import './Intro.scss';
 import code from '../../images/code.jpeg';
 import about from '../../images/about.jpg';
 import home from '../../images/home.jpg';
-import contact from '../../images/contact.jpg';
+import contact from '../../images/contact.png';
 import work from '../../images/work.jpg';
 import resume from '../../images/resume.jpg';
 
