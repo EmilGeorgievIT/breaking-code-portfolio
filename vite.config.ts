@@ -13,7 +13,7 @@ export default defineConfig({
       "src": path.resolve(__dirname, "./src"),
     },
   },
-  base: process.env.VITE_BASE_URL || '/breaking-code-portfolio',
+  base: process.env.VITE_BASE_PATH || '/breaking-code-portfolio',
   css: {
     preprocessorOptions: {
       scss: {
