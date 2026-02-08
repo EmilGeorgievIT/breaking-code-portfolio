@@ -1,7 +1,6 @@
 import React from 'react';
 import resumeImg from '../../images/resume.jpg';
 import './Resume.scss';
-import CV from '../../assets/Emil_Georgiev_CV.pdf';
 
 // --- Types ---
 interface SkillProps {
@@ -138,7 +137,7 @@ export const Resume: React.FC = () => {
                     </article>
 
                     <div className="section__actions">
-                        <a className="btn" href={CV} target="_blank" download="Emil_Georgiev_CV.pdf">
+                        <a className="btn" href="https://drive.google.com/file/d/1fvNv7odNVwgPEy48ElBB_Y4EPYYfagnv/view?usp=sharing" rel="noopener noreferrer" target="_blank">
                             Download CV
                         </a>
                     </div>
