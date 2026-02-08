@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import Slider, { Settings } from "react-slick";
+import Slider from "react-slick";
 
 // Asset imports
 import work from '../../images/work.jpg';
@@ -59,7 +59,7 @@ const PORTFOLIO_DATA: PortfolioItem[] = [
 ];
 
 export const Portfolio: React.FC = () => {
-    const sliderSettings = useMemo<Settings>(() => ({
+    const sliderSettings = useMemo(() => ({
         dots: true,
         infinite: true,
         speed: 500,

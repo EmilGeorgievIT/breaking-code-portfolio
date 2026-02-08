@@ -71,7 +71,11 @@ export const Contact: React.FC = () => {
 
         if (errorValidation()) {
             try {
-                await messageService.sendMail(formData);
+                await messageService.sendMail({
+                    to: formData.email,
+                    subject: `Contact Form Submission from ${formData.name}`,
+                    body: `Name: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`,
+                });
                 setSubmitted(true);
                 // Optional: Reset form here
             } catch (error) {
